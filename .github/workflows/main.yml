@@ -73,7 +73,7 @@ jobs:
             @google/semantic-release-replace-plugin
 
   call-workflow:
-    uses: kkania-splunk/gh-monitor-workflow/.github/workflows/monitor.yml@develop
+    uses: ajanus-splunk/gh-monitor-workflow/.github/workflows/monitor.yml
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
