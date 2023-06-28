@@ -46,6 +46,26 @@ jobs:
           name: report_${{ matrix.tests }}_${{ matrix.python-version }}
           path: report_${{ matrix.tests }}_${{ matrix.python-version }}.xml
 
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - name: Install poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+      - name: Semantic release
+        id: semantic
+        uses: splunk/semantic-release-action@v1.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          git_committer_name: gvanrossum
+          git_committer_email: guido@python.org
+          extra_plugins: |
+            @google/semantic-release-replace-plugin
 
   report_workflow:
     if: always()
