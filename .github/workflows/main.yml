@@ -6,6 +6,8 @@ on:
   workflow_dispatch:
 
 permissions:
+  pull-requests: read
+  issues: write
   contents: write
 
 
@@ -70,6 +72,12 @@ jobs:
           extra_plugins: |
             @google/semantic-release-replace-plugin
 
+  call-workflow:
+    uses: kkania-splunk/gh-monitor-workflow/.github/workflows/monitor.yml@develop
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
   report_workflow:
     if: always()
     runs-on: ubuntu-latest
@@ -80,3 +88,5 @@ jobs:
           splunk_token: ${{ secrets.SPLUNK_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
+
