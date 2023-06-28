@@ -24,6 +24,9 @@ jobs:
       matrix:
         python-version: [ "3.9", "3.10", "3.11" ]
         tests: ["large", "small"]
+        exclude:
+          - python-version: "3.11"
+            tests: large
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
