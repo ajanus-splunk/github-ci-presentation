@@ -43,7 +43,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: report
+          name: report_${{ matrix.tests }}_${{ matrix.python-version }}
           path: report_${{ matrix.tests }}_${{ matrix.python-version }}.xml
 
 
